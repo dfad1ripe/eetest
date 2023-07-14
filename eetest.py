@@ -74,7 +74,7 @@ def getRawGistData(username, since=''):
     info('Please ensure that GitHub username is correct')
     exit(errAPI)
   debug("API response:\n" + q.text)
-  return q.json
+  return q.text
 
 
 ####################
@@ -139,7 +139,14 @@ f.close()
 ####################
 # PART 5. Proceed raw data and display gist names
 #
+jsonData = json.loads(rawData)
 
-print(rawData)
-#if (rawData.len() == 0):
-#  debug('No gists reported from GitHub')
+if (len(jsonData) == 0):
+  debug('No gists reported from GitHub')
+else:
+  for gist in jsonData:
+    try:
+      print(gist['url'])
+    except KeyError as err:
+      info('Error: Incorrect structure of API response, run the script with -v flag for more details')
+      exit(errAPI)
