@@ -34,7 +34,7 @@ Additionally, `pytz` module might be used as shown in the comments in `eetest.py
 
 ## Configuranble parameters
 
-You might want to alter the timeZone parameter, line 33. At the moment the parameter has the value of `-05:00` that corresponds to Central timezone.
+You might want to alter the timeZone parameter, line 33. At the moment the parameter has the value of `-05:00` that corresponds to Central timezone. It should be equal to the timezone of the local machine.
 
 This parameter is used to ensure proper work when the local machine is located not in the same timezone as GitHub servers (that is Pacific, UTC-8).
 
@@ -42,6 +42,6 @@ This parameter is used to ensure proper work when the local machine is located n
 
 The script creates or updates a file named `eetest-data.<githubusername>` at each successful request to GitHub API, writing ISO8601 timestamp of last execution to this file.
 
-Then, on the next run, the timestamp is read form this file and used as `since` parameter in API query.
+Then, on the next run, the timestamp is read from this file and used as `since` parameter in API query.
 
-If a file does not exist, a full list of gists is retrieved.
+If a file does not exist, a full list of gists is retrieved. Thus, a first run with a new GitHub username always retrieves a full list of gists.
