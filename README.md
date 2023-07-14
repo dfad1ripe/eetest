@@ -11,6 +11,7 @@ optionally provide other functionality (possibly via additional command line fla
 functionality *must* be implemented.
 
 ## Usage
+
 ```
 eetest.py [-h] [--verbose [VERBOSE]] githubusername
 
@@ -21,3 +22,26 @@ options:
   --verbose [VERBOSE], -v [VERBOSE]
                         More verbosity (default False)
 ```
+
+## Prerequisites
+
+The script uses common set of Python libraries that a typical script that interacts with API would use: `datetime`, `json`, `re`, `requests`.
+
+Additionally, I use `argparse` module in my designs to parse command line arguments. If it is missed in your system, please use `pip install argparse` command to add it.
+The module is NOT known as conflicting with any system software and thus corresponds to the conditions of the assignment.
+
+Additionally, `pytz` module might be used as shown in the comments in `eetest.py`. To use it, uncomment lines 15 and 133, and comment the line 131.
+
+## Configuranble parameters
+
+You might want to alter the timeZone parameter, line 33. At the moment the parameter has the value of `-05:00` that corresponds to Central timezone.
+
+This parameter is used to ensure proper work when the local machine is located not in the same timezone as GitHub servers (that is Pacific, UTC-8).
+
+## How it works
+
+The script creates or updates a file named `eetest-data.<githubusername>` at each successful request to GitHub API, writing ISO8601 timestamp of last execution to this file.
+
+Then, on the next run, the timestamp is read form this file and used as `since` parameter in API query.
+
+If a file does not exist, a full list of gists is retrieved.
