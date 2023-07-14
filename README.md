@@ -32,7 +32,7 @@ The module is NOT known as conflicting with any system software and thus corresp
 
 Additionally, `pytz` module might be used as shown in the comments in `eetest.py`. To use it, uncomment lines 15 and 133, and comment the line 131.
 
-## Configuranble parameters
+## Configurable parameters
 
 You might want to alter the timeZone parameter, line 33. At the moment the parameter has the value of `-05:00` that corresponds to Central timezone. It should be equal to the timezone of the local machine.
 
